@@ -1,4 +1,21 @@
 table , thead, tbody, tr, th, td{
     border: 1px solid black;
     border-collapse: collapse;
+    font-style: italic;
+}
+thead{
+    background-color: magenta;
+}
+thead~tbody tr{
+    background-color: bisque;
+}
+
+tbody>tr{
+    background-color: white;
+}
+tbody tr:nth-child(2n){
+    background-color: lightpink;
+}
+tbody tr:hover{
+    background-color: magenta;
 }
