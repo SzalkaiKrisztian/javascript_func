@@ -1,0 +1,28 @@
+tbody tr:not(:has(td[rowspan]))+tr:not(:has(td[rowspan])):hover td{
+    font-weight: bold;
+    color: white;
+    background-color: pink;
+}
+tr:has(td[rowspan]):hover td{
+    font-weight: bold;
+    color: white;
+    background-color: pink;
+}
+tr:has(td[rowspan]):hover +tr td{
+    font-weight: bold;
+    color: white;
+    background-color: pink;
+}
+tr:has(td[rowspan]):has(+tr:hover) td{
+    font-weight: bold;
+    color: white;
+    background-color: pink;
+}
+tr:has(td[rowspan])+tr:hover td{
+    font-weight: bold;
+    color: white;
+    background-color: pink;
+}
+tr td:nth-last-child(3), td:nth-last-child(1){
+    background-color: bisque;
+}
