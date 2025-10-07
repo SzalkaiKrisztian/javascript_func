@@ -1,4 +1,4 @@
-/**@type {{theme: string, time:string, scientist1:string, scientist2:string}[]} */
+/**@type {{theme: string, time:string, scientist1:string, scientist2?:string}[]} */
 const arr = [
     {
         theme: 'Optika',
@@ -43,3 +43,16 @@ th1.innerText ="Időszak"
 th2.innerText ="Képviselők"
 
 th2.colSpan="2"
+
+const tbody = document.createElement('tbody')
+table.appendChild(tbody)
+const tr1 = document.createElement('tr')
+
+const td = document.createElement('td')
+for(let i =0; i<4; i++){
+    tbody.appendChild(tr1)
+    for(let j =0; j<4;j++){
+        tr1.appendChild(td)
+        td.innerText =arr[j].theme
+    }
+}
