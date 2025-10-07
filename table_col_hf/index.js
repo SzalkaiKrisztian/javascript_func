@@ -32,27 +32,25 @@ const tr = document.createElement('tr')
 thead.appendChild(tr)
 
 const th = document.createElement('th')
-tr.appendChild(th)
-const th1 = document.createElement('th')
-tr.appendChild(th1)
-const th2 = document.createElement('th')
-tr.appendChild(th2)
-
 th.innerText = "Fizika területe"
+tr.appendChild(th)
+
+const th1 = document.createElement('th')
 th1.innerText ="Időszak"
+tr.appendChild(th1)
+
+const th2 = document.createElement('th')
 th2.innerText ="Képviselők"
+tr.appendChild(th2)
 
 th2.colSpan="2"
 
 const tbody = document.createElement('tbody')
 table.appendChild(tbody)
-const tr1 = document.createElement('tr')
-
-const td = document.createElement('td')
-for(let i =0; i<4; i++){
+for( const seged of arr){
+    const tr1 = document.createElement('tr')
     tbody.appendChild(tr1)
-    for(let j =0; j<4;j++){
-        tr1.appendChild(td)
-        td.innerText =arr[j].theme
-    }
+    const td = document.createElement('td')
+    td.innerText = arr.theme
+    tr.appendChild(td)
 }
