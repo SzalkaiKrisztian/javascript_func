@@ -1,5 +1,5 @@
 /**@type {{theme: string, time:string, scientist1:string, scientist2?:string}[]} */
-const arr = [
+const arr = [ //ez tomb?
     {//tr1
         theme: 'Optika', //td-k
         time: 'XI. szazad',

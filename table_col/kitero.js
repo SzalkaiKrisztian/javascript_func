@@ -90,8 +90,8 @@ for(const hf of arr){
     td3.innerText=hf.szerelme1
     tr1.appendChild(td3)
 
-    if(hf.szerelme2 === undefined){
-        td3.colSpan="2"
+    if(hf.szerelme2 === undefined){//van-e
+        td3.colSpan= 2//ha nincs kitölti
     }else{
         const td4=document.createElement('td')
         td4.innerText=hf.szerelme2
