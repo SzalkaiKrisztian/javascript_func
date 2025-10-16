@@ -15,18 +15,18 @@ button:has(+button){
     color: pink;
 }
 
-tbody tr:not(:has(td[rowspan]))+tr:not(:has(td[rowspan])):hover td{
+tbody tr:not(:has(td[rowspan]))+tr:not(:has(td[rowspan])):hover td{ /*tbodyn belüli tr-nek nincs rowspanos td-je, és az azt követő tr-nek sincs rowspanos td-je hoverelve akkor a teljes sor*/
     background-color: magenta;
 }
-tr:has(td[rowspan]):hover td{
+tr:has(td[rowspan]):hover td{/*hogyha a tr-nek hoverelve van a td-s rowspanje akkor a sor*/
     background-color: magenta;
 }
-tr:has(td[rowspan]):hover +tr td{
+tr:has(td[rowspan]):hover +tr td{/* az utáni sor*/
     background-color: magenta;
 }
-tr:has(td[rowspan]):has(+tr:hover) td{
+tr:has(td[rowspan])+tr:hover td{/*ez a so r utani sor hoverelve van akkor ez a sor*/
     background-color: magenta;
 }
-tr:has(td[rowspan])+tr:hover td{
+tr:has(td[rowspan]):has(+tr:hover) td{/* az utani sor hoveren,akkor ez a sor*/
     background-color: magenta;
 }

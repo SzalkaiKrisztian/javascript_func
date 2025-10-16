@@ -49,17 +49,12 @@ table.appendChild(thead)
 const trh = document.createElement('tr')
 thead.appendChild(trh)
 
-const th1 = document.createElement('th')
-th1.innerText="Nemzetiség"
-trh.appendChild(th1)
-
-const th2 = document.createElement('th')
-th2.innerText="Szerző"
-trh.appendChild(th2)
-
-const th3 = document.createElement('th')
-th3.innerText="Mű"
-trh.appendChild(th3)
+const tomb=["Nemzetiség","Szerző","Mű"]
+for(const husi of tomb){
+    const th = document.createElement('th')
+    th.innerText=husi
+    thead.appendChild(th)
+}
 
 const tbody = document.createElement('tbody')
 table.appendChild(tbody)
@@ -86,11 +81,11 @@ for(const k of arr){
         const tr = document.createElement('tr')
         tbody.appendChild(tr)
 
-        //SZERZO
+        //SZERZO 2
         const tdSz2 = document.createElement('td')
         tdSz2.innerText=k.szerzo2
         tr.appendChild(tdSz2)
-        //MŰ
+        //MŰ 2
         const tdM2 = document.createElement('td')
         tdM2.innerText=k.mu2
         tr.appendChild(tdM2)
