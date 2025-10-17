@@ -98,3 +98,18 @@ for(const hf of arr){
         tr1.appendChild(td4)
     }
 }
+/**szakneve:                                js doc                            ----
+ * 
+ * letrehoz egy cellat adattal
+ * 
+ * @param {string} cellType  //td th
+ * @param {string} cellcContent 
+ * @param {HTMLTableRowElement} parentRow 
+ * 
+ * @returns {void}
+ */
+function createCell(cellType, cellcContent, parentRow){
+        const valami=document.createElement(cellType)
+        valami.innerText=cellcContent
+        parentRow.appendChild(valami)
+}
