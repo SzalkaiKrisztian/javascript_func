@@ -59,18 +59,10 @@ table.appendChild(thead)
 const tr =document.createElement('tr')
 thead.appendChild(tr)
 
-const th1 =document.createElement('th')//1. oszlop headerje
-th1.innerText="Szerző Neve"
-tr.appendChild(th1)
-
-const th2 = document.createElement('th')//2. -||-
-th2.innerText="Korszak"
-tr.appendChild(th2)
-
-const th3 = document.createElement('th') //3. -||-
-th3.innerText="Szerelmek"
-tr.appendChild(th3)
-th3.colSpan="2" // 2.tölt ki
+createCell("th","Szerző neve",tr)
+createCell("th","Korszak",tr)
+const th3 = createCell("th","Szerelmek",tr)
+th3.colSpan=2
 
 const tbody = document.createElement('tbody')
 table.appendChild(tbody)
@@ -78,24 +70,13 @@ for(const hf of arr){
     const tr1 = document.createElement('tr') //tr
     tbody.appendChild(tr1)
 
-    const td1 = document.createElement('td')//szerzo neve
-    td1.innerText=hf.neve
-    tr1.appendChild(td1)
-
-    const td2 = document.createElement('td')//korszaka
-    td2.innerText=hf.kor
-    tr1.appendChild(td2)
-
-    const td3=document.createElement('td')//1. szerelme
-    td3.innerText=hf.szerelme1
-    tr1.appendChild(td3)
-
+    createCell("td",hf.neve,tr1)//szerzo neve
+    createCell("td",hf.kor,tr1)//korszaka
+    const td3 = createCell("td",hf.szerelme1,tr1)//1. szerelme
     if(hf.szerelme2 === undefined){//van-e
         td3.colSpan= 2//ha nincs kitölti
     }else{
-        const td4=document.createElement('td')
-        td4.innerText=hf.szerelme2
-        tr1.appendChild(td4)
+        createCell("td",hf.szerelme2,tr1)
     }
 }
 /**szakneve:                                js doc                            ----
@@ -106,10 +87,11 @@ for(const hf of arr){
  * @param {string} cellcContent 
  * @param {HTMLTableRowElement} parentRow 
  * 
- * @returns {void}
+ * @returns {HTMLTableCellElement} vésszatérünk a létrehozott cella elemmel
  */
 function createCell(cellType, cellcContent, parentRow){
         const valami=document.createElement(cellType)
         valami.innerText=cellcContent
         parentRow.appendChild(valami)
+        return valami
 }
