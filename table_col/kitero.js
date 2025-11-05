@@ -95,3 +95,55 @@ function createCell(cellType, cellcContent, parentRow){
         parentRow.appendChild(valami)
         return valami
 }
+
+//HF
+
+const form = document.createElement('form')
+form.id = 'form_js'
+document.body.appendChild(form)
+
+const h2 = document.createElement('h2')
+h2.innerText='Javascript form'
+form.appendChild(h2)
+
+//label 1
+LabelInput('kolto_neve','költő neve:')
+
+//label 2
+LabelInput('korszak','Korszak:')
+
+//label 3
+LabelInput('szerelme1','Szerelme:')
+
+//label 4
+LabelInput('szerelme2','Szerelme:')
+
+//button
+const button = document.createElement('button')
+button.innerText='Hozzáadás'
+form.appendChild(button)
+
+//br fuggvény
+function SorTor(){
+    const br = document.createElement('br')
+    form.appendChild(br)
+}
+//labelinput fuggveny
+/**
+ * @param {string} kapcs
+ * @param {string} cimke
+ */
+function LabelInput(kapcs,cimke){
+    const label = document.createElement('label')
+    label.htmlFor =kapcs
+    label.innerText=cimke
+    form.appendChild(label)
+    SorTor()
+    const input = document.createElement('input')
+    input.type ='text'
+    input.id = kapcs
+    input.name=kapcs
+    form.appendChild(input)
+    SorTor()
+    SorTor()
+}
