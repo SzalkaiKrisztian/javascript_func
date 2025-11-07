@@ -30,3 +30,8 @@ tr:has(td[rowspan])+tr:hover td{/*ez a so r utani sor hoverelve van akkor ez a s
 tr:has(td[rowspan]):has(+tr:hover) td{/* az utani sor hoveren,akkor ez a sor*/
     background-color: magenta;
 }
+
+/*clickes modosítaso*/
+tr td.marked{
+   color: red; 
+}

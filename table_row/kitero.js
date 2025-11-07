@@ -12,7 +12,7 @@ console.log(obj)
 console.log(obj["name"])
 console.log(obj.age)
 //hf
-/**@type {{nemzet:string,szerzo:string,mu:string,szerzo?:string,mu2?:string}[]} */
+/**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}[]} */
 const arr =[
     {//tr1
         nemzet:'Orosz',
@@ -60,12 +60,21 @@ const tbody = document.createElement('tbody')
 table.appendChild(tbody)
 
 for(const k of arr){
+    
     const trd = document.createElement('tr')
     tbody.appendChild(trd)  
     //NEMZET
     const tdN = document.createElement('td')
     tdN.innerText=k.nemzet
     trd.appendChild(tdN)
+
+    tdN.addEventListener('click',function (e){
+        /**@type {HTMLTableCellElement} */
+        const target=e.target
+        target.classList.add('marked')
+
+    })
+
     //SZERZO
     const tdSz = document.createElement('td')
     tdSz.innerText=k.szerzo
@@ -91,3 +100,85 @@ for(const k of arr){
         tr.appendChild(tdM2)
     }
 }
+/**@type {HTMLFormElement} */
+const htmlform = document.getElementById('htmlform')
+addEventListener('submit',function (e){
+    e.preventDefault()
+    /**@type {HTMLFormElement} */
+    const target =e.target
+
+    /**@type {HTMLInputElement} */
+    const nemzetisegelem= target.querySelector('#nemzetiseg')
+    /**@type {string} */
+    const neS=nemzetisegelem.value
+
+    /**@type {HTMLInputElement} */
+    const szerzoelemelso= target.querySelector('#szerzo1')
+    /**@type {string} */
+    const szeS=szerzoelemelso.value
+
+    /**@type {HTMLInputElement} */
+    const muelem= target.querySelector('#mu1')
+    /**@type {string} */
+    const meS=muelem.value
+
+    /**@type {HTMLInputElement} */
+    const szerzoelemmasodik= target.querySelector('#szerzo2')
+    /**@type {string} */
+    const szemS=szerzoelemmasodik.value
+
+    /**@type {HTMLInputElement} */
+    const muelemmasodik= target.querySelector('#mu2')
+    /**@type {string} */
+    const memS=muelemmasodik.value
+
+    /**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} */
+    const obje ={}
+
+    obje.nemzet = neS
+    obje.szerzo= szeS
+    obje.mu =meS
+    obje.szerzo2=szemS
+    obje.mu2 = memS
+
+    const asd = document.getElementById('alap')
+    const trd = document.createElement('tr')
+    asd.appendChild(trd)  
+    //NEMZET
+    const tdN = document.createElement('td')
+    tdN.innerText=obje.nemzet
+    trd.appendChild(tdN)
+
+    tdN.addEventListener('click',function (e){
+        /**@type {HTMLTableCellElement} */
+        const target=e.target
+        target.classList.add('marked')
+
+    })
+
+    //SZERZO
+    const tdSz = document.createElement('td')
+    tdSz.innerText=obje.szerzo
+    trd.appendChild(tdSz)
+    //MŰ
+    const tdM = document.createElement('td')
+    tdM.innerText=obje.mu
+    trd.appendChild(tdM)
+    //?
+    if(obje.szerzo2 && obje.mu2){
+        tdN.rowSpan=2
+
+        const tr = document.createElement('tr')
+        asd.appendChild(tr)
+
+        //SZERZO 2
+        const tdSz2 = document.createElement('td')
+        tdSz2.innerText=obje.szerzo2
+        tr.appendChild(tdSz2)
+        //MŰ 2
+        const tdM2 = document.createElement('td')
+        tdM2.innerText=obje.mu2
+        tr.appendChild(tdM2)
+    }
+
+})
