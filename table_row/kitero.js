@@ -134,7 +134,7 @@ const htmlform = document.getElementById('htmlform')//form lrtrehoz
 
 const html2form = document.createElement('form')
 html2form.id='jsform'
-document.body.appendChild(htmlform)
+document.body.appendChild(html2form)
 
 createFormElement(html2form,"Nemzetiseg:","nemzetiseg")
 createFormElement(html2form,"Szerző:","szerzo1")
@@ -142,7 +142,9 @@ createFormElement(html2form,"Mű:","mu1")
 createFormElement(html2form,"Másik Szerző:","szerzo2")
 createFormElement(html2form,"Masik mű:","mu2")
 
-
+const buttonA = document.createElement('button')
+buttonA.innerText='Hozzáadás'
+html2form.appendChild(buttonA)
 
 /**@param {HTMLElement} */
 function bR(parent){
@@ -224,14 +226,45 @@ htmlform.addEventListener('submit',function (e){//ha submitolják a gombal akkor
     //----------------------------------------------------------------------------------
     const alap = document.getElementById('alap')//html tabla idje
     const freddy = alap.querySelector('.marked')
-    if(freddy !==null){
-        alap.classList.remove('marked')
-    }else{
-        target.classList.add('marked')
-    }
 
-    arr.push(obje)
-    renderTableBody(arr)
+    const trd = document.createElement('tr')
+    alap.appendChild(trd)  
+    //NEMZET
+    const tdN = document.createElement('td')
+    tdN.innerText=obje.nemzet
+    trd.appendChild(tdN)
+
+    tdN.addEventListener('click',function (e){
+        /**@type {HTMLTableCellElement} */
+        const target=e.target
+        target.classList.add('marked')
+
+    })
+
+    //SZERZO
+    const tdSz = document.createElement('td')
+    tdSz.innerText=obje.szerzo
+    trd.appendChild(tdSz)
+    //MŰ
+    const tdM = document.createElement('td')
+    tdM.innerText=obje.mu
+    trd.appendChild(tdM)
+    //?
+    if(obje.szerzo2 && obje.mu2){
+        tdN.rowSpan=2
+
+        const tr = document.createElement('tr')
+        alap.appendChild(tr)
+
+        //SZERZO 2
+        const tdSz2 = document.createElement('td')
+        tdSz2.innerText=obje.szerzo2
+        tr.appendChild(tdSz2)
+        //MŰ 2
+        const tdM2 = document.createElement('td')
+        tdM2.innerText=obje.mu2
+        tr.appendChild(tdM2)
+    }
 })
 
 html2form.addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadja a táblához
