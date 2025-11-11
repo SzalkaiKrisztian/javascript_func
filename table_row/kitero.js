@@ -68,10 +68,10 @@ for(const k of arr){
     tdN.innerText=k.nemzet
     trd.appendChild(tdN)
 
-    tdN.addEventListener('click',function (e){
+    tdN.addEventListener('click',function (e){//interakcio ha kattintasz megjelöli a tdN-t .marked-el
         /**@type {HTMLTableCellElement} */
-        const target=e.target
-        target.classList.add('marked')
+        const target=e.target//egyik eleme
+        target.classList.add('marked')//.marked css
 
     })
 
@@ -100,42 +100,44 @@ for(const k of arr){
         tr.appendChild(tdM2)
     }
 }
+//hf kommentek
 /**@type {HTMLFormElement} */
-const htmlform = document.getElementById('htmlform')
-addEventListener('submit',function (e){
-    e.preventDefault()
+const htmlform = document.getElementById('htmlform')//form lrtrehoz
+addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadja a táblához
+    e.preventDefault()//nem kell az eredeti
     /**@type {HTMLFormElement} */
-    const target =e.target
+    const target =e.target //lerovidites
 
     /**@type {HTMLInputElement} */
-    const nemzetisegelem= target.querySelector('#nemzetiseg')
+    const nemzetisegelem= target.querySelector('#nemzetiseg')//a lista cimkéire utal
     /**@type {string} */
-    const neS=nemzetisegelem.value
+    const neS=nemzetisegelem.value//string lesz
 
     /**@type {HTMLInputElement} */
-    const szerzoelemelso= target.querySelector('#szerzo1')
+    const szerzoelemelso= target.querySelector('#szerzo1')//a lista cimkéire utal
     /**@type {string} */
-    const szeS=szerzoelemelso.value
+    const szeS=szerzoelemelso.value//string lesz
 
     /**@type {HTMLInputElement} */
-    const muelem= target.querySelector('#mu1')
+    const muelem= target.querySelector('#mu1')//a lista cimkéire utal
     /**@type {string} */
-    const meS=muelem.value
+    const meS=muelem.value//string lesz
 
     /**@type {HTMLInputElement} */
-    const szerzoelemmasodik= target.querySelector('#szerzo2')
+    const szerzoelemmasodik= target.querySelector('#szerzo2')//a lista cimkéire utal
     /**@type {string} */
-    const szemS=szerzoelemmasodik.value
+    const szemS=szerzoelemmasodik.value//string lesz
 
     /**@type {HTMLInputElement} */
-    const muelemmasodik= target.querySelector('#mu2')
+    const muelemmasodik= target.querySelector('#mu2')//a lista cimkéire utal
     /**@type {string} */
-    const memS=muelemmasodik.value
+    const memS=muelemmasodik.value//string lesz
 
+    //a lista cimkei:
     /**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} */
-    const obje ={}
+    const obje ={}//ures de vannak cimkei
 
-    obje.nemzet = neS
+    obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
     obje.szerzo= szeS
     obje.mu =meS
     obje.szerzo2=szemS
