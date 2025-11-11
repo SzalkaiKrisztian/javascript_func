@@ -11,6 +11,14 @@ if(szam >5){
 console.log(obj)
 console.log(obj["name"])
 console.log(obj.age)
+//------------------------------------------------------------------
+
+
+
+//Tablazat
+
+
+
 //hf
 /**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}[]} */
 const arr =[
@@ -111,17 +119,30 @@ function renderTableBody(gyujtemeny){
         }
     }
 }
+//---------------------------------------------------------------------------------------
+
+
+//form
+
+
+
+
+
 //hf kommentek, 3 ,14 ,15
 /**@type {HTMLFormElement} */
 const htmlform = document.getElementById('htmlform')//form lrtrehoz
-htmlform.id='jsform'
+
+const html2form = document.createElement('form')
+html2form.id='jsform'
 document.body.appendChild(htmlform)
 
-createFormElement(htmlform,"Nemzetiseg:","nemzetiseg")
-createFormElement(htmlform,"Szerző:","szerzo1")
-createFormElement(htmlform,"Mű:","mu1")
-createFormElement(htmlform,"Másik Szerző:","szerzo2")
-createFormElement(htmlform,"Masik mű:","mu2")
+createFormElement(html2form,"Nemzetiseg:","nemzetiseg")
+createFormElement(html2form,"Szerző:","szerzo1")
+createFormElement(html2form,"Mű:","mu1")
+createFormElement(html2form,"Másik Szerző:","szerzo2")
+createFormElement(html2form,"Masik mű:","mu2")
+
+
 
 /**@param {HTMLElement} */
 function bR(parent){
@@ -147,7 +168,73 @@ function createFormElement(form, labelszov, id){
     bR(form)
     bR(form)
 }
-addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadja a táblához
+//------------------------------------------------------------------------------
+
+
+
+
+
+//ujanyag
+
+htmlform.addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadja a táblához
+    e.preventDefault()//nem kell az eredeti
+
+    //a lista cimkei:
+    /**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} */
+    const obje ={}//ures de vannak cimkei
+
+    /**@type {HTMLFormElement} */
+    const target =e.target //lerovidites
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const nemzetisegelem= target.querySelector('#nemzetiseg')//a lista cimkéire utal
+    /**@type {string} */
+    const neS=nemzetisegelem.value//string lesz
+    obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const szerzoelemelso= target.querySelector('#szerzo1')//a lista cimkéire utal
+    /**@type {string} */
+    const szeS=szerzoelemelso.value//string lesz
+    obje.szerzo= szeS //HOZZAADAOM AZ OBJHEZ
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const muelem= target.querySelector('#mu1')//a lista cimkéire utal
+    /**@type {string} */
+    const meS=muelem.value//string lesz
+    obje.mu =meS
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const szerzoelemmasodik= target.querySelector('#szerzo2')//a lista cimkéire utal
+    /**@type {string} */
+    const szemS=szerzoelemmasodik.value//string lesz
+    obje.szerzo2=szemS
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const muelemmasodik= target.querySelector('#mu2')//a lista cimkéire utal
+    /**@type {string} */
+    const memS=muelemmasodik.value//string lesz
+    obje.mu2 = memS
+    
+    //----------------------------------------------------------------------------------
+    const alap = document.getElementById('alap')//html tabla idje
+    const freddy = alap.querySelector('.marked')
+    if(freddy !==null){
+        alap.classList.remove('marked')
+    }else{
+        target.classList.add('marked')
+    }
+
+    arr.push(obje)
+    renderTableBody(arr)
+})
+
+html2form.addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadja a táblához
     e.preventDefault()//nem kell az eredeti
 
     //a lista cimkei:
