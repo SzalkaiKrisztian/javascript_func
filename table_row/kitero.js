@@ -114,7 +114,39 @@ function renderTableBody(gyujtemeny){
 //hf kommentek, 3 ,14 ,15
 /**@type {HTMLFormElement} */
 const htmlform = document.getElementById('htmlform')//form lrtrehoz
+htmlform.id='jsform'
+document.body.appendChild(htmlform)
 
+createFormElement(htmlform,"Nemzetiseg:","nemzetiseg")
+createFormElement(htmlform,"Szerző:","szerzo1")
+createFormElement(htmlform,"Mű:","mu1")
+createFormElement(htmlform,"Másik Szerző:","szerzo2")
+createFormElement(htmlform,"Masik mű:","mu2")
+
+/**@param {HTMLElement} */
+function bR(parent){
+    const br = document.createElement('br')
+    parent.appendChild(br)
+}
+/** 
+ * @param {HTMLFormElement} form
+ * @param {string} id
+ * @param {string} labelszov
+*/
+function createFormElement(form, labelszov, id){
+    const label = document.createElement('label')
+    label.htmlFor=id
+    label.innerText=labelszov
+    form.appendChild(label)
+    bR(form)
+    const input = document.createElement('input')
+    input.type="text"
+    input.id=id
+    input.name=id
+    form.appendChild(input)
+    bR(form)
+    bR(form)
+}
 addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadja a táblához
     e.preventDefault()//nem kell az eredeti
 
