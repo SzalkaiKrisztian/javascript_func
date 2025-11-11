@@ -280,7 +280,7 @@ html2form.addEventListener('submit',function (e){//ha submitolják a gombal akko
     obje.mu2 = memS
     
     //----------------------------------------------------------------------------------
-    const alap = document.getElementById('alap')//html tabla idje
+    const alap = document.getElementById('jsform')//html tabla idje
     const freddy = alap.querySelector('.marked')
     if(freddy !==null){
         alap.classList.remove('marked')
