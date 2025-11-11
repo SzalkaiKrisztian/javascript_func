@@ -112,11 +112,6 @@ function renderTableBody(gyujtemeny){
     }
 }
 //hf kommentek, 3 ,14 ,15
-
-
-/**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} */
-const arr2 =[]
-
 /**@type {HTMLFormElement} */
 const htmlform = document.getElementById('htmlform')//form lrtrehoz
 
@@ -174,7 +169,6 @@ addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadj
         target.classList.add('marked')
     }
 
-    arr2.push(obje)
-    renderTableBody(arr2)
+    arr.push(obje)
+    renderTableBody(arr)
 })
-renderTableBody(arr2)
