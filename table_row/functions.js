@@ -175,9 +175,9 @@ function addToHtmlTable(e){//ha submitolják a gombal akkor hzzáadja a tábláh
  */
 function validateFields(inputElement1,inputElement2,inputElement3){
     let valid = true
-    valid = validateField(inputElement1,"kötelező")
-    valid = validateField(inputElement2,"kötelező")
-    valid = validateField(inputElement3,"kötelező")
+    if(validateField(inputElement1,"kötelező") == false){valid =false}
+    if(validateField(inputElement2,"kötelező") == false){valid =false}
+    if(validateField(inputElement3,"kötelező") == false){valid =false}
     return valid
 }
 
