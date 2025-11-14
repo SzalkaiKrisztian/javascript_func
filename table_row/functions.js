@@ -1,0 +1,194 @@
+/**@typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters  */
+/**@param {HTMLElement} */
+function bR(parent){
+    const br = document.createElement('br')
+    parent.appendChild(br)
+}
+/** 
+ * @param {HTMLFormElement} form
+ * @param {string} id
+ * @param {string} labelszov
+*/
+function createFormElement(form, labelszov, id){
+    const div = document.createElement('div')
+    form.appendChild(div)
+
+    const label = document.createElement('label')
+    label.htmlFor=id
+    label.innerText=labelszov
+    div.appendChild(label)
+    bR(div)
+
+    const input = document.createElement('input')
+    input.type="text"
+    input.id=id
+    input.name=id
+    div.appendChild(input)
+    bR(div)
+    bR(div)
+
+    const span = document.createElement('span')
+    span.classList.add('.error')
+    div.appendChild(span)
+}
+
+/**
+ * @param {CountryWriters[]} gyujtemeny
+*/
+function renderTableBody(gyujtemeny){
+    const tbodykepviselo = document.getElementById('teremtett')
+    tbodykepviselo.innerHTML=''
+
+    for(const k of gyujtemeny){
+
+        renderTableRow(tbodykepviselo,k)
+    }
+}
+/**
+ * @param {HTMLTableSectionElement} tablebody
+ * @param {CountryWriters} writerRow
+ */
+function renderTableRow(tablebody,writerRow){
+        const trd = document.createElement('tr')
+        tablebody.appendChild(trd)  
+        //NEMZET
+        tdN= createTabeCell("td",writerRow.nemzet,trd)
+
+        tdN.addEventListener('click',function (e){
+        /**@type {HTMLTableCellElement} */
+        const target=e.target
+        target.classList.add('marked')
+        const os =target.parentElement.parentElement
+        const oS =os.querySelector('marked')
+        if(oS){
+            oS.classList.remove('marked')
+        }
+        })
+
+        //SZERZO
+        createTabeCell("td",writerRow.szerzo,trd)
+        //MŰ
+        createTabeCell("td",writerRow.mu,trd)
+        //? van-e
+        if(writerRow.szerzo2 && writerRow.mu2 ){
+            tdN.rowSpan=2
+
+            const tr = document.createElement('tr')
+            tablebody.appendChild(tr)
+
+            //SZERZO 2
+            createTabeCell("td",writerRow.szerzo2,tr)
+            //MŰ 2
+            createTabeCell("td",writerRow.mu2,tr)
+        }
+}
+
+/** 
+ * @param {"td","th"} celltype
+ * @param {string}  content
+ * @param {HTMLTableRowElement} oselement
+*/
+function createTabeCell(celltype,content,oselement){
+    const belso = document.createElement(celltype)
+    belso.innerText=content
+    oselement.appendChild(belso)
+    return belso
+}
+
+/**
+ * @param {HTMLTableElement} parentbody
+ * @param {string[]} headerlist
+ */
+function generetHeader(parentbody,headerlist){
+
+    const thead = document.createElement('thead')
+    parentbody.appendChild(thead)
+
+    const trHead = document.createElement("tr")
+    thead.appendChild(trHead)
+
+    for(const husi of headerlist){
+        createTabeCell("th",husi,trHead)
+    }
+}
+
+function addToHtmlTable(e){//ha submitolják a gombal akkor hzzáadja a táblához
+    e.preventDefault()//nem kell az eredeti
+
+    //a lista cimkei:
+    /**@type {CountryWriters} */
+    const obje ={}//ures de vannak cimkei
+
+    /**@type {HTMLFormElement} */
+    const target =e.target //lerovidites
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const nemzetisegelem= target.querySelector('#nemzetiseg')//a lista cimkéire utal
+    /**@type {string} */
+    const neS=nemzetisegelem.value//string lesz
+    obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const szerzoelemelso= target.querySelector('#szerzo1')//a lista cimkéire utal
+    /**@type {string} */
+    const szeS=szerzoelemelso.value//string lesz
+    obje.szerzo= szeS //HOZZAADAOM AZ OBJHEZ
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const muelem= target.querySelector('#mu1')//a lista cimkéire utal
+    /**@type {string} */
+    const meS=muelem.value//string lesz
+    obje.mu =meS
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const szerzoelemmasodik= target.querySelector('#szerzo2')//a lista cimkéire utal
+    /**@type {string} */
+    const szemS=szerzoelemmasodik.value//string lesz
+    obje.szerzo2=szemS
+    
+    //----------------------------------------------------------------------------------
+    /**@type {HTMLInputElement} */
+    const muelemmasodik= target.querySelector('#mu2')//a lista cimkéire utal
+    /**@type {string} */
+    const memS=muelemmasodik.value//string lesz
+    obje.mu2 = memS
+    
+    //----------------------------------------------------------------------------------
+    const alap = document.getElementById('alap')//html tabla idje
+
+    renderTableRow(alap,obje)
+    
+}
+
+/**
+ * @param {HTMLInputElement} inputElement1
+ * @param {HTMLInputElement} inputElement2
+ * @param {HTMLInputElement} inputElement3
+ * @returns {boolean}
+ */
+function validateFields(inputElement1,inputElement2,inputElement3){
+    let valid = true
+    if(inputElement1.value==''){
+        const felmeno1 = inputElement1.parentElement
+        felmeno1.querySelector('.error')
+        felmeno1.innerText='kötelező'
+        valid=false
+    }
+    if(inputElement2.value==''){
+        const felmeno2 = inputElement2.parentElement
+        felmeno2.querySelector('.error')
+        felmeno2.innerText='kötelező'
+        valid=false
+    }
+    if(inputElement3.value==''){
+        const felmeno3 = inputElement3.parentElement
+        felmeno3.querySelector('.error')
+        felmeno3.innerText='kötelező'
+        valid=false
+    }
+    return valid
+}

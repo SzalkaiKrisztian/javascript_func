@@ -20,7 +20,7 @@ console.log(obj.age)
 
 
 //hf
-/**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}[]} */
+/**@type {CountryWriters[]} */
 const arr =[
     {//tr1
         nemzet:'Orosz',
@@ -51,18 +51,7 @@ const arr =[
 const table = document.createElement('table')
 document.body.appendChild(table)
 //thead
-const thead = document.createElement('thead')
-table.appendChild(thead)
-
-const trh = document.createElement('tr')
-thead.appendChild(trh)
-
-const tomb=["Nemzetiség","Szerző","Mű"]
-for(const husi of tomb){
-    const th = document.createElement('th')
-    th.innerText=husi
-    thead.appendChild(th)
-}
+generetHeader(table,["Nemzetiseg","Szerzo","Mű"])
 
 const tbody = document.createElement('tbody')
 table.appendChild(tbody)
@@ -70,65 +59,8 @@ tbody.id='teremtett'
 
 renderTableBody(arr)
 
-/**
- * @param {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}[]} gyujtemeny
-*/
-function renderTableBody(gyujtemeny){
-    const tbodykepviselo = document.getElementById('teremtett')
-    tbodykepviselo.innerHTML=''
-
-    for(const k of gyujtemeny){
-
-        const trd = document.createElement('tr')
-        tbodykepviselo.appendChild(trd)  
-        //NEMZET
-        const tdN = document.createElement('td')
-        tdN.innerText=k.nemzet
-        trd.appendChild(tdN)
-
-        tdN.addEventListener('click',function (e){//interakcio ha kattintasz megjelöli a tdN-t .marked-el
-            /**@type {HTMLTableCellElement} */
-            const target=e.target//egyik eleme
-            target.classList.add('marked')//.marked css
-
-        })
-
-        //SZERZO
-        const tdSz = document.createElement('td')
-        tdSz.innerText=k.szerzo
-        trd.appendChild(tdSz)
-        //MŰ
-        const tdM = document.createElement('td')
-        tdM.innerText=k.mu
-        trd.appendChild(tdM)
-        //? van-e
-        if(k.szerzo2 !== undefined && k.mu2 !== undefined){
-            tdN.rowSpan=2
-
-            const tr = document.createElement('tr')
-            tbodykepviselo.appendChild(tr)
-
-            //SZERZO 2
-            const tdSz2 = document.createElement('td')
-            tdSz2.innerText=k.szerzo2
-            tr.appendChild(tdSz2)
-            //MŰ 2
-            const tdM2 = document.createElement('td')
-            tdM2.innerText=k.mu2
-            tr.appendChild(tdM2)
-        }
-    }
-}
-//---------------------------------------------------------------------------------------
 
 
-//form
-
-
-
-
-
-//hf kommentek, 3 ,14 ,15
 /**@type {HTMLFormElement} */
 const htmlform = document.getElementById('htmlform')//form lrtrehoz
 
@@ -146,132 +78,14 @@ const buttonA = document.createElement('button')
 buttonA.innerText='Hozzáadás'
 html2form.appendChild(buttonA)
 
-/**@param {HTMLElement} */
-function bR(parent){
-    const br = document.createElement('br')
-    parent.appendChild(br)
-}
-/** 
- * @param {HTMLFormElement} form
- * @param {string} id
- * @param {string} labelszov
-*/
-function createFormElement(form, labelszov, id){
-    const label = document.createElement('label')
-    label.htmlFor=id
-    label.innerText=labelszov
-    form.appendChild(label)
-    bR(form)
-    const input = document.createElement('input')
-    input.type="text"
-    input.id=id
-    input.name=id
-    form.appendChild(input)
-    bR(form)
-    bR(form)
-}
-//------------------------------------------------------------------------------
 
+htmlform.addEventListener('submit',addToHtmlTable)
 
-
-
-
-//ujanyag
-
-htmlform.addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadja a táblához
+html2form.addEventListener('submit',function(e){//ha submitolják a gombal akkor hzzáadja a táblához
     e.preventDefault()//nem kell az eredeti
 
     //a lista cimkei:
-    /**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} */
-    const obje ={}//ures de vannak cimkei
-
-    /**@type {HTMLFormElement} */
-    const target =e.target //lerovidites
-    
-    //----------------------------------------------------------------------------------
-    /**@type {HTMLInputElement} */
-    const nemzetisegelem= target.querySelector('#nemzetiseg')//a lista cimkéire utal
-    /**@type {string} */
-    const neS=nemzetisegelem.value//string lesz
-    obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
-    
-    //----------------------------------------------------------------------------------
-    /**@type {HTMLInputElement} */
-    const szerzoelemelso= target.querySelector('#szerzo1')//a lista cimkéire utal
-    /**@type {string} */
-    const szeS=szerzoelemelso.value//string lesz
-    obje.szerzo= szeS //HOZZAADAOM AZ OBJHEZ
-    
-    //----------------------------------------------------------------------------------
-    /**@type {HTMLInputElement} */
-    const muelem= target.querySelector('#mu1')//a lista cimkéire utal
-    /**@type {string} */
-    const meS=muelem.value//string lesz
-    obje.mu =meS
-    
-    //----------------------------------------------------------------------------------
-    /**@type {HTMLInputElement} */
-    const szerzoelemmasodik= target.querySelector('#szerzo2')//a lista cimkéire utal
-    /**@type {string} */
-    const szemS=szerzoelemmasodik.value//string lesz
-    obje.szerzo2=szemS
-    
-    //----------------------------------------------------------------------------------
-    /**@type {HTMLInputElement} */
-    const muelemmasodik= target.querySelector('#mu2')//a lista cimkéire utal
-    /**@type {string} */
-    const memS=muelemmasodik.value//string lesz
-    obje.mu2 = memS
-    
-    //----------------------------------------------------------------------------------
-    const alap = document.getElementById('alap')//html tabla idje
-    const freddy = alap.querySelector('.marked')
-
-    const trd = document.createElement('tr')
-    alap.appendChild(trd)  
-    //NEMZET
-    const tdN = document.createElement('td')
-    tdN.innerText=obje.nemzet
-    trd.appendChild(tdN)
-
-    tdN.addEventListener('click',function (e){
-        /**@type {HTMLTableCellElement} */
-        const target=e.target
-        target.classList.add('marked')
-
-    })
-
-    //SZERZO
-    const tdSz = document.createElement('td')
-    tdSz.innerText=obje.szerzo
-    trd.appendChild(tdSz)
-    //MŰ
-    const tdM = document.createElement('td')
-    tdM.innerText=obje.mu
-    trd.appendChild(tdM)
-    //?
-    if(obje.szerzo2 && obje.mu2){
-        tdN.rowSpan=2
-
-        const tr = document.createElement('tr')
-        alap.appendChild(tr)
-
-        //SZERZO 2
-        const tdSz2 = document.createElement('td')
-        tdSz2.innerText=obje.szerzo2
-        tr.appendChild(tdSz2)
-        //MŰ 2
-        const tdM2 = document.createElement('td')
-        tdM2.innerText=obje.mu2
-        tr.appendChild(tdM2)
-    }
-})
-
-html2form.addEventListener('submit',function (e){//ha submitolják a gombal akkor hzzáadja a táblához
-    e.preventDefault()//nem kell az eredeti
-
-    //a lista cimkei:
-    /**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} */
+    /**@type {CountryWriters} */
     const obje ={}//ures de vannak cimkei
 
     /**@type {HTMLFormElement} */
@@ -314,12 +128,6 @@ html2form.addEventListener('submit',function (e){//ha submitolják a gombal akko
     
     //----------------------------------------------------------------------------------
     const alap = document.getElementById('jsform')//html tabla idje
-    const freddy = alap.querySelector('.marked')
-    if(freddy !==null){
-        alap.classList.remove('marked')
-    }else{
-        target.classList.add('marked')
-    }
 
     arr.push(obje)
     renderTableBody(arr)
