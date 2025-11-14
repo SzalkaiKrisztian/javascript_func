@@ -47,37 +47,37 @@ const arr =[
         mu:'A fizikusok',
     }      
 ]
-//table letrahozasa
-const table = document.createElement('table')
-document.body.appendChild(table)
-//thead
-generetHeader(table,["Nemzetiseg","Szerzo","Mű"])
-
-const tbody = document.createElement('tbody')
-table.appendChild(tbody)
-tbody.id='teremtett'
+generateTable("teremtett",["Nemzetiseg","Szerzo","Mű"])
 
 renderTableBody(arr)
 
-
+/**
+ * @type {LabInpAdat[]}
+ */
+const formArr=[
+    {
+        label: "Nemzetiség:",
+        input: "nemzetiseg",
+    },{
+        label: "Szerző:",
+        input: "szerzo1",
+    },{
+        label: "Mű:",
+        input: "mu1",
+    },{
+        label: "Másik Szerző:",
+        input: "szerzo2",
+    },{
+        label: "Mű:",
+        input: "mu2",
+    },
+]
 
 /**@type {HTMLFormElement} */
 const htmlform = document.getElementById('htmlform')//form lrtrehoz
 
-const jsForm = document.createElement('form')
-jsForm.id='jsform'
-document.body.appendChild(jsForm)
-
-createFormElement(jsForm,"Nemzetiseg:","nemzetiseg")
-createFormElement(jsForm,"Szerző:","szerzo1")
-createFormElement(jsForm,"Mű:","mu1")
-createFormElement(jsForm,"Másik Szerző:","szerzo2")
-createFormElement(jsForm,"Masik mű:","mu2")
-
-const buttonA = document.createElement('button')
-buttonA.innerText='Hozzáadás'
-jsForm.appendChild(buttonA)
-
+/**@type {HTMLFormElement} */
+const jsForm = compactFormRenderer("jsform",formArr)
 
 htmlform.addEventListener('submit',addToHtmlTable)
 

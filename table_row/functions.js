@@ -1,4 +1,7 @@
-/**@typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters  */
+/**
+ * @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters 
+ * @typedef {{label:string,input:string}} LabInpAdat
+ */
 /**@param {HTMLElement} */
 function bR(parent){
     const br = document.createElement('br')
@@ -27,7 +30,6 @@ function createFormElement(form, labelszov, id){
 
     bR(div)
     const span = document.createElement('span')
-    span.classList.remove('error')
     span.classList.add('error')
     div.appendChild(span)
     bR(div)
@@ -161,7 +163,6 @@ function addToHtmlTable(e){//ha submitolják a gombal akkor hzzáadja a tábláh
 
         //----------------------------------------------------------------------------------
         const alap = document.getElementById('alap')//html tabla idje
-
         renderTableRow(alap,obje)
     }
 }
@@ -174,22 +175,58 @@ function addToHtmlTable(e){//ha submitolják a gombal akkor hzzáadja a tábláh
  */
 function validateFields(inputElement1,inputElement2,inputElement3){
     let valid = true
-    if(inputElement1.value==''){
-        const felmeno1 = inputElement1.parentElement
-        const felM=felmeno1.querySelector('.error')
-        felM.innerText='kötelező'
-        valid=false
+    valid = validateField(inputElement1,"kötelező")
+    valid = validateField(inputElement2,"kötelező")
+    valid = validateField(inputElement3,"kötelező")
+    return valid
+}
+
+/**
+ * @param {string} id
+ * @param {string[]} nevtomb
+ */
+function compactFormRenderer(id,nevtomb){
+    const jsForm = document.createElement('form')
+    jsForm.id=id
+    document.body.appendChild(jsForm)
+
+    for(const fasirt of nevtomb){
+        createFormElement(jsForm,fasirt.label,fasirt.input)
     }
-    if(inputElement2.value==''){
-        const felmeno2 = inputElement2.parentElement
-        const felM =felmeno2.querySelector('.error')
-        felM.innerText='kötelező'
-        valid=false
-    }
-    if(inputElement3.value==''){
-        const felmeno3 = inputElement3.parentElement
+    
+    const buttonA = document.createElement('button')
+    buttonA.innerText='Hozzáadás'
+    jsForm.appendChild(buttonA)
+    return jsForm
+}
+
+/**
+ * @param {string} tbodyId
+ * @param {string[]} fejleclist
+ */
+function generateTable(tbodyId,fejleclist){
+
+    //table letrahozasa
+    const table = document.createElement('table')
+    document.body.appendChild(table)
+    //thead
+    generetHeader(table,fejleclist)
+
+    const tbody = document.createElement('tbody')
+    table.appendChild(tbody)
+    tbody.id=tbodyId
+}
+
+/**
+ * @param {} htmlImputField
+ * @param {string} hibaUzenet
+ */
+function validateField(htmlImputField,hibaUzenet){
+    let valid =true
+    if(htmlImputField.value==''){
+        const felmeno3 = htmlImputField.parentElement
         const felM=felmeno3.querySelector('.error')
-        felM.innerText='kötelező'
+        felM.innerText=hibaUzenet
         valid=false
     }
     return valid
