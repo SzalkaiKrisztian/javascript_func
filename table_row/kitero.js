@@ -64,27 +64,26 @@ renderTableBody(arr)
 /**@type {HTMLFormElement} */
 const htmlform = document.getElementById('htmlform')//form lrtrehoz
 
-const html2form = document.createElement('form')
-html2form.id='jsform'
-document.body.appendChild(html2form)
+const jsForm = document.createElement('form')
+jsForm.id='jsform'
+document.body.appendChild(jsForm)
 
-createFormElement(html2form,"Nemzetiseg:","nemzetiseg")
-createFormElement(html2form,"Szerző:","szerzo1")
-createFormElement(html2form,"Mű:","mu1")
-createFormElement(html2form,"Másik Szerző:","szerzo2")
-createFormElement(html2form,"Masik mű:","mu2")
+createFormElement(jsForm,"Nemzetiseg:","nemzetiseg")
+createFormElement(jsForm,"Szerző:","szerzo1")
+createFormElement(jsForm,"Mű:","mu1")
+createFormElement(jsForm,"Másik Szerző:","szerzo2")
+createFormElement(jsForm,"Masik mű:","mu2")
 
 const buttonA = document.createElement('button')
 buttonA.innerText='Hozzáadás'
-html2form.appendChild(buttonA)
+jsForm.appendChild(buttonA)
 
 
 htmlform.addEventListener('submit',addToHtmlTable)
 
-html2form.addEventListener('submit',function(e){//ha submitolják a gombal akkor hzzáadja a táblához
+jsForm.addEventListener('submit',function(e){//ha submitolják a gombal akkor hzzáadja a táblához
     e.preventDefault()//nem kell az eredeti
 
-    //a lista cimkei:
     /**@type {CountryWriters} */
     const obje ={}//ures de vannak cimkei
 
@@ -93,42 +92,42 @@ html2form.addEventListener('submit',function(e){//ha submitolják a gombal akkor
     
     //----------------------------------------------------------------------------------
     /**@type {HTMLInputElement} */
-    const nemzetisegelem= target.querySelector('#nemzetiseg')//a lista cimkéire utal
-    /**@type {string} */
-    const neS=nemzetisegelem.value//string lesz
-    obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
-    
-    //----------------------------------------------------------------------------------
+    const nemzetisegelem= target.querySelector('#nemzetiseg')
     /**@type {HTMLInputElement} */
-    const szerzoelemelso= target.querySelector('#szerzo1')//a lista cimkéire utal
-    /**@type {string} */
-    const szeS=szerzoelemelso.value//string lesz
-    obje.szerzo= szeS //HOZZAADAOM AZ OBJHEZ
-    
-    //----------------------------------------------------------------------------------
+    const szerzoelemelso= target.querySelector('#szerzo1')
     /**@type {HTMLInputElement} */
-    const muelem= target.querySelector('#mu1')//a lista cimkéire utal
-    /**@type {string} */
-    const meS=muelem.value//string lesz
-    obje.mu =meS
-    
-    //----------------------------------------------------------------------------------
+    const muelem= target.querySelector('#mu1')
     /**@type {HTMLInputElement} */
-    const szerzoelemmasodik= target.querySelector('#szerzo2')//a lista cimkéire utal
-    /**@type {string} */
-    const szemS=szerzoelemmasodik.value//string lesz
-    obje.szerzo2=szemS
-    
-    //----------------------------------------------------------------------------------
+    const szerzoelemmasodik= target.querySelector('#szerzo2')
     /**@type {HTMLInputElement} */
-    const muelemmasodik= target.querySelector('#mu2')//a lista cimkéire utal
-    /**@type {string} */
-    const memS=muelemmasodik.value//string lesz
-    obje.mu2 = memS
+    const muelemmasodik= target.querySelector('#mu2')
     
     //----------------------------------------------------------------------------------
-    const alap = document.getElementById('jsform')//html tabla idje
+    
+    if(validateFields(nemzetisegelem,szerzoelemelso,muelem)){
+        //----------------------------------------------------------------------------------
+        /**@type {string} */
+        const neS=nemzetisegelem.value//string lesz
+        /**@type {string} */
+        const szeS=szerzoelemelso.value//string lesz
+        /**@type {string} */
+        const meS=muelem.value//string lesz
+        /**@type {string} */
+        const szemS=szerzoelemmasodik.value//string lesz
+        /**@type {string} */
+        const memS=muelemmasodik.value//string lesz
 
-    arr.push(obje)
-    renderTableBody(arr)
+        //----------------------------------------------------------------------------------
+        obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
+        obje.szerzo= szeS
+        obje.mu =meS
+        obje.szerzo2=szemS
+        obje.mu2 = memS
+
+        //----------------------------------------------------------------------------------
+        arr.push(obje)
+        renderTableBody(arr)
+    }
+
+    
 })

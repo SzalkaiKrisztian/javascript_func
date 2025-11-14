@@ -24,26 +24,28 @@ function createFormElement(form, labelszov, id){
     input.id=id
     input.name=id
     div.appendChild(input)
-    bR(div)
-    bR(div)
 
+    bR(div)
     const span = document.createElement('span')
-    span.classList.add('.error')
+    span.classList.remove('error')
+    span.classList.add('error')
     div.appendChild(span)
+    bR(div)
 }
 
-/**
- * @param {CountryWriters[]} gyujtemeny
+//--------------------------------------------------------------------------
+/** 
+ * @param {"td"|"th"} celltype
+ * @param {string}  content
+ * @param {HTMLTableRowElement} oselement
 */
-function renderTableBody(gyujtemeny){
-    const tbodykepviselo = document.getElementById('teremtett')
-    tbodykepviselo.innerHTML=''
-
-    for(const k of gyujtemeny){
-
-        renderTableRow(tbodykepviselo,k)
-    }
+function createTabeCell(celltype,content,oselement){
+    const belso = document.createElement(celltype)
+    belso.innerText=content
+    oselement.appendChild(belso)
+    return belso
 }
+
 /**
  * @param {HTMLTableSectionElement} tablebody
  * @param {CountryWriters} writerRow
@@ -83,16 +85,17 @@ function renderTableRow(tablebody,writerRow){
         }
 }
 
-/** 
- * @param {"td","th"} celltype
- * @param {string}  content
- * @param {HTMLTableRowElement} oselement
+/**
+ * @param {CountryWriters[]} gyujtemeny
 */
-function createTabeCell(celltype,content,oselement){
-    const belso = document.createElement(celltype)
-    belso.innerText=content
-    oselement.appendChild(belso)
-    return belso
+function renderTableBody(gyujtemeny){
+    const tbodykepviselo = document.getElementById('teremtett')
+    tbodykepviselo.innerHTML=''
+
+    for(const k of gyujtemeny){
+
+        renderTableRow(tbodykepviselo,k)
+    }
 }
 
 /**
@@ -112,10 +115,10 @@ function generetHeader(parentbody,headerlist){
     }
 }
 
+//---------------------------------------------------------------------------
 function addToHtmlTable(e){//ha submitolják a gombal akkor hzzáadja a táblához
     e.preventDefault()//nem kell az eredeti
 
-    //a lista cimkei:
     /**@type {CountryWriters} */
     const obje ={}//ures de vannak cimkei
 
@@ -124,44 +127,43 @@ function addToHtmlTable(e){//ha submitolják a gombal akkor hzzáadja a tábláh
     
     //----------------------------------------------------------------------------------
     /**@type {HTMLInputElement} */
-    const nemzetisegelem= target.querySelector('#nemzetiseg')//a lista cimkéire utal
-    /**@type {string} */
-    const neS=nemzetisegelem.value//string lesz
-    obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
-    
-    //----------------------------------------------------------------------------------
+    const nemzetisegelem= target.querySelector('#nemzetiseg')
     /**@type {HTMLInputElement} */
-    const szerzoelemelso= target.querySelector('#szerzo1')//a lista cimkéire utal
-    /**@type {string} */
-    const szeS=szerzoelemelso.value//string lesz
-    obje.szerzo= szeS //HOZZAADAOM AZ OBJHEZ
-    
-    //----------------------------------------------------------------------------------
+    const szerzoelemelso= target.querySelector('#szerzo1')
     /**@type {HTMLInputElement} */
-    const muelem= target.querySelector('#mu1')//a lista cimkéire utal
-    /**@type {string} */
-    const meS=muelem.value//string lesz
-    obje.mu =meS
-    
-    //----------------------------------------------------------------------------------
+    const muelem= target.querySelector('#mu1')
     /**@type {HTMLInputElement} */
-    const szerzoelemmasodik= target.querySelector('#szerzo2')//a lista cimkéire utal
-    /**@type {string} */
-    const szemS=szerzoelemmasodik.value//string lesz
-    obje.szerzo2=szemS
-    
-    //----------------------------------------------------------------------------------
+    const szerzoelemmasodik= target.querySelector('#szerzo2')
     /**@type {HTMLInputElement} */
-    const muelemmasodik= target.querySelector('#mu2')//a lista cimkéire utal
-    /**@type {string} */
-    const memS=muelemmasodik.value//string lesz
-    obje.mu2 = memS
+    const muelemmasodik= target.querySelector('#mu2')
     
     //----------------------------------------------------------------------------------
-    const alap = document.getElementById('alap')//html tabla idje
+    
+    if(validateFields(nemzetisegelem,szerzoelemelso,muelem)){
+        //----------------------------------------------------------------------------------
+        /**@type {string} */
+        const neS=nemzetisegelem.value//string lesz
+        /**@type {string} */
+        const szeS=szerzoelemelso.value//string lesz
+        /**@type {string} */
+        const meS=muelem.value//string lesz
+        /**@type {string} */
+        const szemS=szerzoelemmasodik.value//string lesz
+        /**@type {string} */
+        const memS=muelemmasodik.value//string lesz
 
-    renderTableRow(alap,obje)
-    
+        //----------------------------------------------------------------------------------
+        obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
+        obje.szerzo= szeS
+        obje.mu =meS
+        obje.szerzo2=szemS
+        obje.mu2 = memS
+
+        //----------------------------------------------------------------------------------
+        const alap = document.getElementById('alap')//html tabla idje
+
+        renderTableRow(alap,obje)
+    }
 }
 
 /**
@@ -174,20 +176,20 @@ function validateFields(inputElement1,inputElement2,inputElement3){
     let valid = true
     if(inputElement1.value==''){
         const felmeno1 = inputElement1.parentElement
-        felmeno1.querySelector('.error')
-        felmeno1.innerText='kötelező'
+        const felM=felmeno1.querySelector('.error')
+        felM.innerText='kötelező'
         valid=false
     }
     if(inputElement2.value==''){
         const felmeno2 = inputElement2.parentElement
-        felmeno2.querySelector('.error')
-        felmeno2.innerText='kötelező'
+        const felM =felmeno2.querySelector('.error')
+        felM.innerText='kötelező'
         valid=false
     }
     if(inputElement3.value==''){
         const felmeno3 = inputElement3.parentElement
-        felmeno3.querySelector('.error')
-        felmeno3.innerText='kötelező'
+        const felM=felmeno3.querySelector('.error')
+        felM.innerText='kötelező'
         valid=false
     }
     return valid
