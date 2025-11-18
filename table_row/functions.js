@@ -1,7 +1,7 @@
 /**
- * @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters 
- * @typedef {{label:string,input:string}} LabInpAdat
- */
+* @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters 
+* @typedef {{label:string,input:string}} LabInpAdat
+*/
 /**@param {HTMLElement} */
 function bR(parent){
     const br = document.createElement('br')
@@ -61,11 +61,11 @@ function renderTableRow(tablebody,writerRow){
         tdN.addEventListener('click',function (e){
         /**@type {HTMLTableCellElement} */
         const target=e.target
-        target.classList.add('marked')
-        const os =target.parentElement.parentElement
-        const oS =os.querySelector('marked')
-        if(oS){
-            oS.classList.remove('marked')
+        const addMarked = target.classList.add('marked')
+        const osbody =addMarked.parentElement.parentElement //td(target)-->tr-->tbody
+        const Marked =osbody.querySelector('.marked')
+        if(Marked != null){
+            Marked.classList.remove('marked')
         }
         })
 
