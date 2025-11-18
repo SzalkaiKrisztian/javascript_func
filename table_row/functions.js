@@ -35,6 +35,24 @@ function createFormElement(form, labelszov, id){
     bR(div)
 }
 
+/**
+ * @param {string} id
+ * @param {LabInpAdat[]} nevtomb
+ */
+function compactFormRenderer(id,nevtomb){
+    const jsForm = document.createElement('form')
+    jsForm.id=id
+    document.body.appendChild(jsForm)
+
+    for(const fasirt of nevtomb){
+        createFormElement(jsForm,fasirt.label,fasirt.input)
+    }
+    
+    const buttonA = document.createElement('button')
+    buttonA.innerText='Hozzáadás'
+    jsForm.appendChild(buttonA)
+    return jsForm
+}
 //--------------------------------------------------------------------------
 /** 
  * @param {"td"|"th"} celltype
@@ -180,25 +198,6 @@ function validateFields(inputElement1,inputElement2,inputElement3){
     if(validateField(inputElement2,"kötelező") == false){valid =false}
     if(validateField(inputElement3,"kötelező") == false){valid =false}
     return valid
-}
-
-/**
- * @param {string} id
- * @param {LabInpAdat[]} nevtomb
- */
-function compactFormRenderer(id,nevtomb){
-    const jsForm = document.createElement('form')
-    jsForm.id=id
-    document.body.appendChild(jsForm)
-
-    for(const fasirt of nevtomb){
-        createFormElement(jsForm,fasirt.label,fasirt.input)
-    }
-    
-    const buttonA = document.createElement('button')
-    buttonA.innerText='Hozzáadás'
-    jsForm.appendChild(buttonA)
-    return jsForm
 }
 
 /**
