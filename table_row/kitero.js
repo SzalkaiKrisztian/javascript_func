@@ -121,12 +121,14 @@ jsForm.addEventListener('submit',function(e){//ha submitolják a gombal akkor hz
         obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
         obje.szerzo= szeS
         obje.mu =meS
-        obje.szerzo2=szemS
-        obje.mu2 = memS
+        szemS=='' ? obje.szerzo2=undefined : obje.szerzo2=szemS
+        memS =='' ? obje.mu2=undefined :obje.mu2=memS
 
         //----------------------------------------------------------------------------------
         arr.push(obje)
+        console.log(arr)
         renderTableBody(arr)
+        
     }
 
     

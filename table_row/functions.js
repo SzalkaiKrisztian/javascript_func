@@ -58,21 +58,17 @@ function renderTableRow(tablebody,writerRow){
         //NEMZET
         tdN= createTabeCell("td",writerRow.nemzet,trd)
 
-        
         tdN.addEventListener('click',function (e){
-        const osbody =parentElement.parentElement //td(target)-->tr-->tbody
         /**@type {HTMLTableCellElement} */
         const target=e.target
+        const osbody =target.parentElement.parentElement //td(target)-->tr-->tbody
         const Marked =osbody.querySelector('.marked')
-        const addMarked = target.classList
         if(Marked != null){
-            addMarked.remove('marked')
+            Marked.classList.remove('marked')
         }
-        addMarked.add('marked')
+        target.classList.add('marked')
         })
         
-        
-
         //SZERZO
         createTabeCell("td",writerRow.szerzo,trd)
         //MŰ
