@@ -158,12 +158,13 @@ function addToHtmlTable(e){//ha submitolják a gombal akkor hzzáadja a tábláh
         obje.nemzet = neS//egyes cimkekhez hozzarendelem a stringe alakitott targeteket
         obje.szerzo= szeS
         obje.mu =meS
-        obje.szerzo2=szemS
-        obje.mu2 = memS
+        szemS=='' ? obje.szerzo2=undefined : obje.szerzo2=szemS
+        memS =='' ? obje.mu2=undefined :obje.mu2=memS
 
         //----------------------------------------------------------------------------------
         const alap = document.getElementById('alap')//html tabla idje
         renderTableRow(alap,obje)
+        console.log(obje)
     }
 }
 
@@ -228,6 +229,11 @@ function validateField(htmlImputField,hibaUzenet){
         const felM=felmeno3.querySelector('.error')
         felM.innerText=hibaUzenet
         valid=false
+    }else{
+        const felmeno3 = htmlImputField.parentElement
+        const felM=felmeno3.querySelector('.error')
+        felM.innerText=''
     }
+    
     return valid
 }

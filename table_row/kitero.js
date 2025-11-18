@@ -1,16 +1,16 @@
 /**@type {{name:string}[]} */
-const obj ={
+const obj1 ={
 }
 const szam=3
 if(szam >5){
-    obj.name='harcsa'
+    obj1.name='harcsa'
     
 }else{
-    obj["name"]='kacsa'
+    obj1["name"]='kacsa'
 }
-console.log(obj)
-console.log(obj["name"])
-console.log(obj.age)
+console.log(obj1)
+console.log(obj1["name"])
+console.log(obj1.age)
 //------------------------------------------------------------------
 
 
@@ -126,10 +126,9 @@ jsForm.addEventListener('submit',function(e){//ha submitolják a gombal akkor hz
 
         //----------------------------------------------------------------------------------
         arr.push(obje)
+        //console.log(obje)
         console.log(arr)
         renderTableBody(arr)
         
     }
-
-    
 })
