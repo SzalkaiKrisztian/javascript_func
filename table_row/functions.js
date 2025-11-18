@@ -184,7 +184,7 @@ function validateFields(inputElement1,inputElement2,inputElement3){
 
 /**
  * @param {string} id
- * @param {string[]} nevtomb
+ * @param {LabInpAdat[]} nevtomb
  */
 function compactFormRenderer(id,nevtomb){
     const jsForm = document.createElement('form')
