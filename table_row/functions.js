@@ -68,6 +68,17 @@ function createTabeCell(celltype,content,oselement){
     return belso
 }
 
+function redOnClick(e){
+    /**@type {HTMLTableCellElement} */
+    const target=e.target
+    const osbody =target.parentElement.parentElement //td(target)-->tr-->tbody
+    const Marked =osbody.querySelector('.marked')
+    if(Marked != null){
+        Marked.classList.remove('marked')
+    }
+    target.classList.add('marked')
+}
+
 /**
  * @param {HTMLTableSectionElement} tablebody
  * @param {CountryWriters} writerRow
@@ -78,16 +89,7 @@ function renderTableRow(tablebody,writerRow){
         //NEMZET
         tdN= createTabeCell("td",writerRow.nemzet,trd)
 
-        tdN.addEventListener('click',function (e){
-        /**@type {HTMLTableCellElement} */
-        const target=e.target
-        const osbody =target.parentElement.parentElement //td(target)-->tr-->tbody
-        const Marked =osbody.querySelector('.marked')
-        if(Marked != null){
-            Marked.classList.remove('marked')
-        }
-        target.classList.add('marked')
-        })
+        tdN.addEventListener('click',redOnClick)
         
         //SZERZO
         createTabeCell("td",writerRow.szerzo,trd)
