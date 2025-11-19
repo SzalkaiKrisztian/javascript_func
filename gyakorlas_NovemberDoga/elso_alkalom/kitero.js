@@ -1,5 +1,5 @@
 /**@type {TablaArryTipus[]} */
-const arrJs=[
+const arrTable=[
     {
         nemzet: "Orosz",
         szerzo: "Gogol",
@@ -22,6 +22,30 @@ const arrJs=[
         mu: "A fizikusok"
     }
 ]
+createTable("jsTable",["Nemzetiség","Szerző","Mű"],arrTable)
 
-createTable("jsTable",["Nemzetiség","Szerző","Mű"],arrJs)
+/**@type {FormArryTipus[]} */
+const arrForm=[
+    {
+        txt:"Nemzetiseg:",
+        tag:"nemzetiseg"
+    },
+    {
+        txt:"Szerző:",
+        tag:"szerzo1"
+    },
+    {
+        txt:"Mű:",
+        tag:"mu1"
+    },
+    {
+        txt:"Másik Szerző:",
+        tag:"szerzo2"
+    },
+    {
+        txt:"Mű:",
+        tag:"mu2"
+    },
+]
+const jsForm =createForm("jsForm",arrForm)
 

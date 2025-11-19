@@ -1,5 +1,6 @@
 /**
  * @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} TablaArryTipus
+ * @typedef {{txt:string,tag:string}} FormArryTipus
  */
 //----------------------------Table------------------------------------->
 /**
@@ -101,4 +102,49 @@ function bR(parentDiv){
     const br = document.createElement('br')
     parentDiv.appendChild(br)
 }
+/**
+ * 
+ * @param {HTMLFormElement} parentForm 
+ * @param {string} forIdNameTag 
+ * @param {string} labContent 
+ */
+function createFormDivElement(parentForm,forIdNameTag,labContent){
+    const div = document.createElement('div')
+    parentForm.appendChild(div)
 
+    const label = document.createElement('label')
+    label.htmlFor=forIdNameTag
+    label.innerText=labContent
+    div.appendChild(label)
+    bR(div)
+    const input = document.createElement('input')
+    input.type="text"
+    input.id=forIdNameTag
+    input.forIdNameTag
+    div.appendChild(input)
+    bR(div)
+    const span = document.createElement('span')
+    span.classList.add('error')
+    div.appendChild(span)
+    bR(div)
+}
+/**
+ * 
+ * @param {string} id 
+ * @param {FormArryTipus[]} txtTag 
+ * @returns {HTMLFormElement}
+ */
+function createForm(id,txtTag){
+    const jsform = document.createElement('form')
+    jsform.id=id
+    document.body.appendChild(jsform)
+
+    for(const cim of txtTag){
+        createFormDivElement(jsform,cim.tag,cim.txt)
+    }
+
+    const jsButton = document.createElement('button')
+    jsButton.innerText="Hozzáadás"
+    jsform.appendChild(jsButton)
+    return jsform
+}
