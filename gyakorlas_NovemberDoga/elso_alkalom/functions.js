@@ -148,3 +148,48 @@ function createForm(id,txtTag){
     jsform.appendChild(jsButton)
     return jsform
 }
+//----------------------------event,valid------------------------------------------->
+
+function AddTableRowToTable(e){
+    /**@type {HTMLFormElement} */
+    const target =e.target
+
+    //-------------------------------------Lekerem az inputokat------------------------>
+    /**@type {HTMLInputElement} */
+    const nemzetisegInput = target.querySelector('#nemzetiseg')
+    /**@type {HTMLInputElement} */
+    const szerzo1Input = target.querySelector('#szerzo1')
+    /**@type {HTMLInputElement} */
+    const mu1Input = target.querySelector('#mu1')
+    /**@type {HTMLInputElement} */
+    const szerzo2Input = target.querySelector('#szerzo2')
+    /**@type {HTMLInputElement} */
+    const mu2Input = target.querySelector('#mu2')
+
+    //----------------------------------------string típusuvá állitjuk az inputokat--------------->
+    /**@type {string} */
+    const nemzetisegInputString = nemzetisegInput.value
+    /**@type {string} */
+    const szerzo1InputString = szerzo1Input.value
+    /**@type {string}*/
+    const mu1InputString =mu1Input.value
+    /**@type {string} */
+    const szerzo2InputString = szerzo2Input.value
+    /**@type {string}*/
+    const mu2InputString =mu2Input.value
+
+    //----------------------------Feltöltjük a stringeket egy objektumba----------------------->
+    /**@type {TableArryTipus} */
+    const obj ={}
+    obj.nemzet=nemzetisegInputString
+    obj.szerzo=szerzo1InputString
+    obj.mu=mu1InputString
+    //-----ha üres akkor undefined-ra sllitjuk az objektumban (obj)-------------->
+    szerzo2InputString =='' ? obj.szerzo2=undefined : obj.szerzo2=szerzo2InputString
+    mu2InputString == '' ? obj.mu2 = undefined : obj.mu2=mu2InputString
+
+    //---------------------------------------------------------------------------------------->
+    const htmlTable=document.getElementById('htmlTable')
+    createTableRow(htmlTable,obj)
+    console.log(obj)
+}
