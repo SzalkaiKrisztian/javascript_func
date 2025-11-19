@@ -2,7 +2,7 @@
 * @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters 
 * @typedef {{label:string,input:string}} LabInpAdat
 */
-/**@param {HTMLElement} */
+/**@param {HTMLElement} parent */
 function bR(parent){
     const br = document.createElement('br')
     parent.appendChild(br)
@@ -11,6 +11,7 @@ function bR(parent){
  * @param {HTMLFormElement} form
  * @param {string} id
  * @param {string} labelszov
+ * 
 */
 function createFormElement(form, labelszov, id){
     const div = document.createElement('div')
@@ -38,20 +39,21 @@ function createFormElement(form, labelszov, id){
 /**
  * @param {string} id
  * @param {LabInpAdat[]} nevtomb
+ * @returns {HTMLFormElement}
  */
 function compactFormRenderer(id,nevtomb){
-    const jsForm = document.createElement('form')
-    jsForm.id=id
-    document.body.appendChild(jsForm)
+    const formalis = document.createElement('form')
+    formalis.id=id
+    document.body.appendChild(formalis)
 
     for(const fasirt of nevtomb){
-        createFormElement(jsForm,fasirt.label,fasirt.input)
+        createFormElement(formalis,fasirt.label,fasirt.input)
     }
     
     const buttonA = document.createElement('button')
     buttonA.innerText='Hozzáadás'
-    jsForm.appendChild(buttonA)
-    return jsForm
+    formalis.appendChild(buttonA)
+    return formalis
 }
 //--------------------------------------------------------------------------
 /** 
@@ -187,9 +189,9 @@ function addToHtmlTable(e){//ha submitolják a gombal akkor hzzáadja a tábláh
 }
 
 /**
- * @param {HTMLInputElement} inputElement1
- * @param {HTMLInputElement} inputElement2
- * @param {HTMLInputElement} inputElement3
+ * @param {htmlImputField} inputElement1
+ * @param {htmlImputField} inputElement2
+ * @param {htmlImputField} inputElement3
  * @returns {boolean}
  */
 function validateFields(inputElement1,inputElement2,inputElement3){
@@ -218,8 +220,9 @@ function generateTable(tbodyId,fejleclist){
 }
 
 /**
- * @param {} htmlImputField
+ * @param {htmlImputField} htmlImputField
  * @param {string} hibaUzenet
+ * @returns {Boolean}
  */
 function validateField(htmlImputField,hibaUzenet){
     let valid =true
