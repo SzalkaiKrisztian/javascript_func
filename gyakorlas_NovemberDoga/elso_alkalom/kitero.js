@@ -23,7 +23,8 @@ const arrTable=[
         mu: "A fizikusok"
     }
 ]
-createTable("jsTable",["Nemzetiség","Szerző","Mű"],arrTable)
+createTable("jsTable",["Nemzetiség","Szerző","Mű"])
+createTableBody(arrTable)
 //-------------------------------------Form-------------------------------------->
 /**@type {FormArryTipus[]} */
 const arrForm=[
@@ -92,6 +93,6 @@ jsForm.addEventListener('submit',function(e){
 
     //---------------------------------------------------------------------------------------->
     arrTable.push(obj)
-    createTable("jsTable",["Nemzetiség","Szerző","Mű"],arrTable)
+    createTableBody(arrTable)
     console.log(arrTable)
 })

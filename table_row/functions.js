@@ -87,7 +87,7 @@ function renderTableRow(tablebody,writerRow){
         const trd = document.createElement('tr')
         tablebody.appendChild(trd)  
         //NEMZET
-        tdN= createTabeCell("td",writerRow.nemzet,trd)
+        const tdN= createTabeCell("td",writerRow.nemzet,trd)
 
         tdN.addEventListener('click',redOnClick)
         

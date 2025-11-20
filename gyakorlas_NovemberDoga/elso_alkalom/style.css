@@ -2,6 +2,9 @@ table, thead, tbody, tr, th, td{
     border-collapse: collapse;
     border: 1px dashed brown;
 }
+th{
+    background-color: brown;
+}
 tr td:nth-last-child(1),  tr td:nth-last-child(3){
     background-color: bisque;
 }

@@ -65,18 +65,13 @@ function createTableHeader(tableAmihezFuz,fejLec){
 }
 }
 /**
- * 
- * @param {string} tbodyId 
  * @param {TablaArryTipus[]} tombArry
- * @param {HTMLTableElement} tableAmihezFuz
  */
-function createTableBody(tbodyId,tombArry,tableAmihezFuz){
-    const tbody = document.createElement('tbody')
-    tbody.id=tbodyId
-    tableAmihezFuz.appendChild(tbody)
-
+function createTableBody(tombArry){
+    const jsTbody = document.getElementById('jsTable')
+    jsTbody.innerHTML=''
     for(const cim of tombArry){
-        createTableRow(tableAmihezFuz,cim)
+        createTableRow(jsTbody,cim)
     }
 }
 /**
@@ -85,13 +80,15 @@ function createTableBody(tbodyId,tombArry,tableAmihezFuz){
  * @param {string[]} fejLec
  * @param {TablaArryTipus[]} tombArry
  */
-function createTable(bodyId,fejLec,tombArry){
+function createTable(bodyId,fejLec){
     const table = document.createElement('table')
     document.body.appendChild(table)
 
     createTableHeader(table,fejLec)
 
-    createTableBody(bodyId,tombArry,table)
+    const jsTbody = document.createElement('tbody')
+    table.appendChild(jsTbody)
+    jsTbody.id=bodyId
 }
 //----------------------------Form-------------------------------------->
 /**
@@ -179,7 +176,7 @@ function AddTableRowToTable(e){
     const mu2InputString =mu2Input.value
 
     //----------------------------Feltöltjük a stringeket egy objektumba----------------------->
-    /**@type {TableArryTipus} */
+    /**@type {TablaArryTipus} */
     const obj ={}
     obj.nemzet=nemzetisegInputString
     obj.szerzo=szerzo1InputString
