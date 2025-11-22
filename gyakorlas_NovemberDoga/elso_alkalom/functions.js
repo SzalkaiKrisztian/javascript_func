@@ -18,6 +18,7 @@ function createTableCell(cellType,cellContent,parentTr){
 /**
  * @param {HTMLTableSectionElement} bodyAmihezFuz
  * @param {TableArryTipus} egyObjeltumAdatai
+ * @returns {void}
  */
 function createTableRow(bodyAmihezFuz,egyObjeltumAdatai){
     const bodyTr = document.createElement('tr')
@@ -52,6 +53,7 @@ function createTableRow(bodyAmihezFuz,egyObjeltumAdatai){
  * 
  * @param {HTMLTableElement} tableAmihezFuz 
  * @param {string[]} fejLec 
+ * @returns {void}
  */
 function createTableHeader(tableAmihezFuz,fejLec){
     const thead = document.createElement('thead')
@@ -66,6 +68,7 @@ function createTableHeader(tableAmihezFuz,fejLec){
 }
 /**
  * @param {TablaArryTipus[]} tombArry
+ * @returns {void}
  */
 function createTableBody(tombArry){
     const jsTbody = document.getElementById('jsTable')
@@ -79,6 +82,7 @@ function createTableBody(tombArry){
  * @param {string} bodyId 
  * @param {string[]} fejLec
  * @param {TablaArryTipus[]} tombArry
+ * @returns {void}
  */
 function createTable(bodyId,fejLec){
     const table = document.createElement('table')
@@ -93,7 +97,8 @@ function createTable(bodyId,fejLec){
 //----------------------------Form-------------------------------------->
 /**
  * 
- * @param {HTMLDivElement} parentDiv 
+ * @param {HTMLDivElement} parentDiv
+ * @returns {void} 
  */
 function bR(parentDiv){
     const br = document.createElement('br')
@@ -104,6 +109,7 @@ function bR(parentDiv){
  * @param {HTMLFormElement} parentForm 
  * @param {string} forIdNameTag 
  * @param {string} labContent 
+ * @returns {void}
  */
 function createFormDivElement(parentForm,forIdNameTag,labContent){
     const div = document.createElement('div')
@@ -180,7 +186,10 @@ function validFields(nemzetInput,szerzo1Input,mu1Input){
     if(validField(mu1Input,"Kötelező Kitölteni!") == false){vanE=false}
     return vanE
 }
-/**@param {HTMLFormElement} e */
+/**
+ * @param {Event} e 
+ * @returns {void}
+*/
 function addTableRowToTable(e){
     e.preventDefault()
     /**@type {HTMLFormElement} */
