@@ -52,8 +52,9 @@ const arrForm=[
 const jsForm =createForm("jsForm",arrForm)
 const htmlForm = document.getElementById('htmlForm')
 //--------------------------------------Eventlisteners------------------------------------->
-htmlForm.addEventListener('submit',AddTableRowToTable)
+htmlForm.addEventListener('submit',addTableRowToTable)
 jsForm.addEventListener('submit',function(e){
+    e.preventDefault()
     /**@type {HTMLFormElement} */
     const target =e.target
 
@@ -69,30 +70,32 @@ jsForm.addEventListener('submit',function(e){
     /**@type {HTMLInputElement} */
     const mu2Input = target.querySelector('#mu2')
 
-    //----------------------------------------string típusuvá állitjuk az inputokat--------------->
-    /**@type {string} */
-    const nemzetisegInputString = nemzetisegInput.value
-    /**@type {string} */
-    const szerzo1InputString = szerzo1Input.value
-    /**@type {string}*/
-    const mu1InputString =mu1Input.value
-    /**@type {string} */
-    const szerzo2InputString = szerzo2Input.value
-    /**@type {string}*/
-    const mu2InputString =mu2Input.value
+    if(validFields(nemzetisegInput,szerzo1Input,mu1Input)){
+        //----------------------------------------string típusuvá állitjuk az inputokat--------------->
+        /**@type {string} */
+        const nemzetisegInputString = nemzetisegInput.value
+        /**@type {string} */
+        const szerzo1InputString = szerzo1Input.value
+        /**@type {string}*/
+        const mu1InputString =mu1Input.value
+        /**@type {string} */
+        const szerzo2InputString = szerzo2Input.value
+        /**@type {string}*/
+        const mu2InputString =mu2Input.value
 
-    //----------------------------Feltöltjük a stringeket egy objektumba----------------------->
-    /**@type {TableArryTipus} */
-    const obj ={}
-    obj.nemzet=nemzetisegInputString
-    obj.szerzo=szerzo1InputString
-    obj.mu=mu1InputString
-    //-----ha üres akkor undefined-ra sllitjuk az objektumban (obj)-------------->
-    szerzo2InputString =='' ? obj.szerzo2=undefined : obj.szerzo2=szerzo2InputString
-    mu2InputString == '' ? obj.mu2 = undefined : obj.mu2=mu2InputString
+        //----------------------------Feltöltjük a stringeket egy objektumba----------------------->
+        /**@type {TableArryTipus} */
+        const obj ={}
+        obj.nemzet=nemzetisegInputString
+        obj.szerzo=szerzo1InputString
+        obj.mu=mu1InputString
+        //-----ha üres akkor undefined-ra sllitjuk az objektumban (obj)-------------->
+        szerzo2InputString =='' ? obj.szerzo2=undefined : obj.szerzo2=szerzo2InputString
+        mu2InputString == '' ? obj.mu2 = undefined : obj.mu2=mu2InputString
 
-    //---------------------------------------------------------------------------------------->
-    arrTable.push(obj)
-    createTableBody(arrTable)
-    console.log(arrTable)
+        //---------------------------------Hozzáadás------------------------------------------------------->
+        arrTable.push(obj)
+        createTableBody(arrTable)
+        console.log(arrTable)
+    }
 })

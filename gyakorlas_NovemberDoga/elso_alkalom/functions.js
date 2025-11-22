@@ -146,8 +146,43 @@ function createForm(id,txtTag){
     return jsform
 }
 //----------------------------event,valid------------------------------------------->
-
-function AddTableRowToTable(e){
+/**
+ * 
+ * @param {HTMLInputElement} azInput 
+ * @param {string} errorSzoveg 
+ * @returns {Boolean}
+ */
+function validField(azInput,errorSzoveg){
+    let vanE= true
+    if(azInput.value == ''){
+        const parentDiv = azInput.parentElement
+        const span=parentDiv.querySelector('.error')
+        span.innerText=errorSzoveg
+        vanE=false
+    }else{
+        const parentDiv = azInput.parentElement
+        const span=parentDiv.querySelector('.error')
+        span.innerText=''
+    }
+    return vanE
+}
+/**
+ * 
+ * @param {HTMLInputElement} nemzetInput 
+ * @param {HTMLInputElement} szerzo1Input 
+ * @param {HTMLInputElement} mu1Input
+ * @returns {Boolean} 
+ */
+function validFields(nemzetInput,szerzo1Input,mu1Input){
+    let vanE=true
+    if(validField(nemzetInput,"Kötelező Kitölteni!") == false){vanE=false}
+    if(validField(szerzo1Input,"Kötelező Kitölteni!") == false){vanE=false}
+    if(validField(mu1Input,"Kötelező Kitölteni!") == false){vanE=false}
+    return vanE
+}
+/**@param {HTMLFormElement} e */
+function addTableRowToTable(e){
+    e.preventDefault()
     /**@type {HTMLFormElement} */
     const target =e.target
 
@@ -163,30 +198,32 @@ function AddTableRowToTable(e){
     /**@type {HTMLInputElement} */
     const mu2Input = target.querySelector('#mu2')
 
-    //----------------------------------------string típusuvá állitjuk az inputokat--------------->
-    /**@type {string} */
-    const nemzetisegInputString = nemzetisegInput.value
-    /**@type {string} */
-    const szerzo1InputString = szerzo1Input.value
-    /**@type {string}*/
-    const mu1InputString =mu1Input.value
-    /**@type {string} */
-    const szerzo2InputString = szerzo2Input.value
-    /**@type {string}*/
-    const mu2InputString =mu2Input.value
+    if(validFields(nemzetisegInput,szerzo1Input,mu1Input)){
+        //----------------------------------------string típusuvá állitjuk az inputokat--------------->
+        /**@type {string} */
+        const nemzetisegInputString = nemzetisegInput.value
+        /**@type {string} */
+        const szerzo1InputString = szerzo1Input.value
+        /**@type {string}*/
+        const mu1InputString =mu1Input.value
+        /**@type {string} */
+        const szerzo2InputString = szerzo2Input.value
+        /**@type {string}*/
+        const mu2InputString =mu2Input.value
 
-    //----------------------------Feltöltjük a stringeket egy objektumba----------------------->
-    /**@type {TablaArryTipus} */
-    const obj ={}
-    obj.nemzet=nemzetisegInputString
-    obj.szerzo=szerzo1InputString
-    obj.mu=mu1InputString
-    //-----ha üres akkor undefined-ra sllitjuk az objektumban (obj)-------------->
-    szerzo2InputString =='' ? obj.szerzo2=undefined : obj.szerzo2=szerzo2InputString
-    mu2InputString == '' ? obj.mu2 = undefined : obj.mu2=mu2InputString
+        //----------------------------Feltöltjük a stringeket egy objektumba----------------------->
+        /**@type {TablaArryTipus} */
+        const obj ={}
+        obj.nemzet=nemzetisegInputString
+        obj.szerzo=szerzo1InputString
+        obj.mu=mu1InputString
+        //-----ha üres akkor undefined-ra sllitjuk az objektumban (obj)-------------->
+        szerzo2InputString =='' ? obj.szerzo2=undefined : obj.szerzo2=szerzo2InputString
+        mu2InputString == '' ? obj.mu2 = undefined : obj.mu2=mu2InputString
 
-    //---------------------------------------------------------------------------------------->
-    const htmlTable=document.getElementById('htmlTable')
-    createTableRow(htmlTable,obj)
-    console.log(obj)
+        //-------------------------------------HozzáFűz--------------------------------------------------->
+        const htmlTable=document.getElementById('htmlTable')
+        createTableRow(htmlTable,obj)
+        console.log(obj)
+    }
 }
