@@ -1,3 +1,4 @@
+
 /**
  * 
  * Létrehoz egy kitöltött div elemet egyeb azonosítóval, és hozzáfűzi a bemeneti paraméterhez.
@@ -14,7 +15,6 @@ function createOtherDivForSelect(element){
     elem.classList.add('card'); // hozzáadjuk a card css osztályt
     element.appendChild(elem) // hozzáfűzzük a létrehozott elemet a bemeneti paraméterhez
 }
-
 /**
  * 
  * Egy azonosító alapján eltávolítja a hide css osztályt az elemről egy szülőelemen belül.
@@ -33,7 +33,6 @@ function makeVisibleBasedOnId(parentDiv, id){
         visibleCard.classList.remove('hide'); // eltávolítjuk a hide css osztályt
     }
 }
-
 /**
  * 
  * Egy azonosító alapján hozzáadja a hide css osztályt az elemhez egy szülőelemen belül.
@@ -52,7 +51,6 @@ function makeInvisibleBasedOnid(parentDiv, id){
         visibleCard.classList.add('hide'); // hozzáadjuk a hide css osztályt
     }
 }
-
 /**
  * 
  * A lenyíló menü értéke alapján elrejt és megjelenít elemeket. Ha ferfi akkor a ferfi id-val rendelkező elemet, ha no,
@@ -71,8 +69,6 @@ function hideBasedOnSelected(dropdownList){
     }
     makeVisibleBasedOnId(selDiv,option)
 }
-
-
 /**
  * 
  * Egy checkbox html input element checked értéke alapján elrejtjük, 
@@ -93,7 +89,6 @@ function hideBasedOnCheckbox(checkbox){
         makeVisibleBasedOnId(checkParent,'no')
     }
 }
-
 /**
  * 
  * A lenyíló menü eseménykezelő függvénye. A lenyíló menü kiválasztott értéke alapján
@@ -108,7 +103,6 @@ function changeDropdownList(e){
     const target=e.target
     hideBasedOnSelected(target)
 }
-
 /**
  * 
  * A jelölőnégyzet értékének változtatásakor, megjelenítjük a vagy a férfi vagy a nő kártyát.
